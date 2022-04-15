@@ -2,29 +2,51 @@
   <div class="grid-item no-grid-item">
 	<div class="custom-select font">
       <select id="first-dropdown">
+		 	<option value="0">Door products</option>        
+              {% for collection in collections %}
+                  {% if collection.title == "door-products" %}
+                      {% for product in collection.products %}
+                              <option value="{{ product.title }};{{ product | image_url: width: 300 }};{{ product.content | base64_encode }}">
+                                {{ product.title }}</option>
+                      {% endfor %}
+                  {% endif %}
+              {% endfor %}
+      </select>  
+    </div>
+    <div class="custom-select font">
+      <select id="second-dropdown">
+		 	<option value="0">Window products</option>        
+              {% for collection in collections %}
+                  {% if collection.title == "window-products" %}
+                      {% for product in collection.products %}
+                              <option value="{{ product.title }};{{ product | image_url: width: 300 }};{{ product.content | base64_encode }}">
+                                {{ product.title }}</option>
+                      {% endfor %}
+                  {% endif %}
+              {% endfor %}
+	  </select>  
+   	</div>
+    <div class="custom-select font">
+      <select id="third-dropdown">
 		 	<option value="0">Aluminium products</option>        
-        {% for product in collections.Products.products %}
-                <option value="{{ product.title }};{{ product | image_url: width: 300 }};{{ product.content | base64_encode }}">
-                  {{ product.title }}</option>
-        {% endfor %}
+              {% for collection in collections %}
+                  {% if collection.title == "aluminium-products" %}
+                      {% for product in collection.products %}
+                              <option value="{{ product.title }};{{ product | image_url: width: 300 }};{{ product.content | base64_encode }}">
+                                {{ product.title }}</option>
+                      {% endfor %}
+                  {% endif %}
+              {% endfor %}
       </select>
     </div>
-<!--    	<div class="custom-select font">
-      <select id="second-dropdown">
-		 	<option value="0">PVC Windows</option>        
-        {% for product in collections.Products.products %}
-                <option value="{{ forloop.index }}">{{ product.title }}</option>
-        {% endfor %}
-      </select>
-    </div> -->
   </div>
   <div class="grid-item">
-    <img src="{{ collections.Products.products[1] | image_url: width: 300 }}" alt="Product main image">
+    <img id="main-picture" src="{{ collections.Products.products[1] | image_url: width: 300 }}" alt="Product main image">
   </div>
   <div class="grid-item">
   </div>
   <div class="grid-item top-border">
-  	<p>{{ collections.Products.products[1].content }}</p>
+  	<p id="main-description">{{ collections.Products.products[1].content }}</p>
   </div>
 </div>
 
@@ -37,8 +59,12 @@
   border-radius: 5px;
   border-color: #bdbaba;
   width: 400px;
-  float: right;
   margin: 0 auto;
+  margin-top: 10px;
+}
+
+.select-selected:hover {
+  color: #989393;
 }
 
 .custom-select select {
@@ -195,13 +221,14 @@ input[type='radio']:checked:before {
   background:black;
 }
 
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:800px) {
   .grid-main-row {
       grid-template-columns: 1fr;
   }
 
   .custom-select {
     width: 300px;
+	float:none;
    }
 }
 
@@ -257,7 +284,7 @@ for (i = 0; i < l; i++) {
     c.addEventListener("click", function(e) {
       
 		
-		selectionCall("#first-dropdown option", e.target.innerHTML)
+		selectionCall("#third-dropdown option", e.target.innerHTML)
 //        	selectionCall("#second-dropdown option", e.target.innerHTML)
       	
 
@@ -334,9 +361,9 @@ function selectionCall(selector, text){
   	}
   
   	var optionValue = option.getAttribute("value");
-  	var results = optionValue.split(';')
-    
-    console.log(results)
-  
+  	var results = optionValue.split(";")
+	    
+    document.getElementById("main-picture").src=results[1];
+//     document.getElementById("main-description").innerHTML = atob(results[2])
 }
 </script>
