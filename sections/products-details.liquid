@@ -6,7 +6,7 @@
               {% for collection in collections %}
                   {% if collection.title == "door-products" %}
                       {% for product in collection.products %}
-                              <option value="{{ product.title }};{{ product | image_url: width: 300 }};{{ product.content | base64_encode }}">
+                              <option value="{{ product.title }};{{ product | image_url: width: 850 }};{{ product.content | base64_encode }}">
                                 {{ product.title }}</option>
                       {% endfor %}
                   {% endif %}
@@ -19,7 +19,7 @@
               {% for collection in collections %}
                   {% if collection.title == "window-products" %}
                       {% for product in collection.products %}
-                              <option value="{{ product.title }};{{ product | image_url: width: 300 }};{{ product.content | base64_encode }}">
+                              <option value="{{ product.title }};{{ product | image_url: width: 850 }};{{ product.content | base64_encode }}">
                                 {{ product.title }}</option>
                       {% endfor %}
                   {% endif %}
@@ -32,7 +32,7 @@
               {% for collection in collections %}
                   {% if collection.title == "aluminium-products" %}
                       {% for product in collection.products %}
-                              <option value="{{ product.title }};{{ product | image_url: width: 300 }};{{ product.content | base64_encode }}">
+                              <option value="{{ product.title }};{{ product | image_url: width: 850 }};{{ product.content | base64_encode }}">
                                 {{ product.title }}</option>
                       {% endfor %}
                   {% endif %}
@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="grid-item">
-    <img id="main-picture" src="{{ collections.Products.products[1] | image_url: width: 300 }}" alt="Product main image">
+    <img id="main-picture" src="{{ collections.Products.products[1] | image_url: width: 850 }}" alt="Product main image">
   </div>
   <div class="grid-item">
   </div>
@@ -150,7 +150,7 @@
 
 .grid-item {
     display: grid;
-    justify-content: center;
+    justify-content: left;
     padding: 20px;
 	line-height: 22.4px
 	box-size: border-box;
@@ -230,6 +230,10 @@ input[type='radio']:checked:before {
     width: 300px;
 	float:none;
    }
+}
+
+#main-description {
+	justify-content: left;
 }
 
 #main-footer {
@@ -316,8 +320,6 @@ for (i = 0; i < l; i++) {
     });
 }
 
-var DROPDOWNS = ["first-dropdown", "second-dropdown", "thrid-dropdown"]
-
 function closeAllSelect(elmnt) {
   /*a function that will close all select boxes in the document,
   except the current select box:*/
@@ -363,7 +365,7 @@ function resetOtherDropdowns(currentDropdown){
   
 function resetDropdowns(){
   var dropdowns = ["first-dropdown","second-dropdown","third-dropdown"]
-  for(var i=0;i<dropdowns.length; i++){
+  for(var i=0;i < dropdowns.length; i++){
       var element = document.querySelector("#"+ dropdowns[i] +" div.select-selected");
 			element.innerHTML = document.querySelector("#"+ dropdowns[i] +" select option[value='0']").textContent
   }
